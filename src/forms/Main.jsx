@@ -1,5 +1,27 @@
-import React from "react";
-import {StyleSheet, Text, View, Button} from "react-native";
+import React, {useRef, useEffect} from "react";
+import {Animated, StyleSheet, Text, View, Button} from "react-native";
+
+const FadeInView = props => {
+    const fadeAnim = useRef(new Animated.Value(0)).current; // Initial value for opacity: 0
+  
+    useEffect(() => {
+      Animated.timing(fadeAnim, {
+        toValue: 1,
+        duration: 10000,
+        useNativeDriver: true,
+      }).start();
+    }, [fadeAnim]);
+  
+    return (
+      <Animated.View // Special animatable View
+        style={{
+          ...props.style,
+          opacity: fadeAnim, // Bind opacity to animated value
+        }}>
+        {props.children}
+      </Animated.View>
+    );
+  };
 
 const Main = ({navigation}) => {
     const irCategoriaHabitos = () => {
@@ -16,11 +38,19 @@ const Main = ({navigation}) => {
     };
     return(
         <View style={style.container}>
-            <Button style={[style.button_style, {backgroundColor: "#87C644"}]} onPress={irCategoriaHabitos} title="Categoria Habitos"/>
-            <Button style={[style.button_style, {backgroundColor: "#44C6B9"}]} onPress={irListaHabitos} title="Lista Habitos"/>
-            <Button style={[style.button_style, {backgroundColor: "#AE44C6"}]} onPress={irRegistroHabitos} title="Registro Habitos"/>
-            <Button style={[style.button_style, {backgroundColor: "#C67444"}]} onPress={irMain} title="Main"/>
-            <Text sytle={style.text_categoria_habito}>Main</Text>
+            <Button style={style.button_style} onPress={irCategoriaHabitos} title="Categoria Habitos"/>
+            <Button style={style.button_style} onPress={irListaHabitos} title="Lista Habitos"/>
+            <Button style={style.button_style} onPress={irRegistroHabitos} title="Registro Habitos"/>
+            <Button style={style.button_style} onPress={irMain} title="Main"/>
+            <Text sytle={style.text_categoria_habito}>Primera Animacion</Text>
+            <FadeInView
+                style={{
+                width: 250,
+                height: 50,
+                backgroundColor: 'powderblue'
+            }}>
+                <Text style={{fontSize: 28, textAlign: 'center', margin: 10}}>Fading in</Text>
+            </FadeInView>
         </View>
     )
 };
@@ -41,6 +71,7 @@ const style = StyleSheet.create({
         height: '50',
         marginBottom: '5',
         marginTop: '5',
+        color: 'green'
     }
 });
 
