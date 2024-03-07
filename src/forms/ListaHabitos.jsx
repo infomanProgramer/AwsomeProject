@@ -1,7 +1,7 @@
 import React from "react";
 import {StyleSheet, Text, View, Button} from "react-native";
 
-const Main = ({navigation}) => {
+const ListaHabitos = ({navigation}) => {
     const irCategoriaHabitos = () => {
         navigation.navigate('CategoriaHabitos')
     };
@@ -20,7 +20,7 @@ const Main = ({navigation}) => {
             <Button style={[style.button_style, {backgroundColor: "#44C6B9"}]} onPress={irListaHabitos} title="Lista Habitos"/>
             <Button style={[style.button_style, {backgroundColor: "#AE44C6"}]} onPress={irRegistroHabitos} title="Registro Habitos"/>
             <Button style={[style.button_style, {backgroundColor: "#C67444"}]} onPress={irMain} title="Main"/>
-            <Text sytle={style.text_categoria_habito}>Main</Text>
+            <Text sytle={style.text_categoria_habito}>Lista Habitos</Text>
         </View>
     )
 };
@@ -44,4 +44,4 @@ const style = StyleSheet.create({
     }
 });
 
-export default Main
+export default ListaHabitos
